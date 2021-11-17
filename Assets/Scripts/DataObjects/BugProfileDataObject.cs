@@ -31,4 +31,8 @@ public class BugProfileDataObject : ScriptableObject
     public string BugLatinName;
     public string BugDecription;
 
+    [Header("Job Info")]
+    public List<string> BugJobDescription;
+    public int BugJobBasePayment;
+
 }

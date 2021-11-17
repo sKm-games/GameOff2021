@@ -54,3 +54,9 @@ MonoBehaviour:
   BugName: Norwegian Wasp
   BugLatinName: Dolichovespula norwegica
   BugDecription: Have a stingy
+  BugJobDescription:
+  - Test job info 3
+  - Test job info 2
+  - Test job info 4
+  - Test job info 1
+  BugJobBasePayment: 1337

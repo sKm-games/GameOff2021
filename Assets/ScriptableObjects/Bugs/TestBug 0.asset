@@ -54,3 +54,9 @@ MonoBehaviour:
   BugName: Red Harvester An
   BugLatinName: Pogonomyrmex barbatus
   BugDecription: Ants are cool and like to build stuff
+  BugJobDescription:
+  - Test job info 4
+  - Test job info 2
+  - Test job info 1
+  - Test job info 3
+  BugJobBasePayment: 1337

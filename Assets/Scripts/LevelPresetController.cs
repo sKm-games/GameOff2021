@@ -14,7 +14,6 @@ public class LevelPresetController : MonoBehaviour
     [SerializeField] private List<Sprite> furnitureSprites;
     [SerializeField] private List<Color> furnitureColors;
     
-
     private List<SpriteRenderer> spawnPoints;
     private BugProfileDataObject bugProfile;
 
@@ -81,7 +80,8 @@ public class LevelPresetController : MonoBehaviour
     }
 
     public void SetUpInvestigationPhase(BugProfileDataObject bp)
-    {        
+    {
+        Debug.Log("LevelPresetController:SetUpInvestigationPhase: Start");
         bugProfile = bp;
 
         spawnPoints.Shuffle();
@@ -101,7 +101,7 @@ public class LevelPresetController : MonoBehaviour
             int r = Random.Range(0, 2);            
             if (r == 0) //sprite clue
             {
-                Debug.Log("Spawn sprite clue " + i); 
+                //Debug.Log("Spawn sprite clue " + i); 
                 if (spriteIndex >= bugProfile.BugCluesSpritesPrfabs.Count-1)
                 {
                     spriteIndex = 0;               
@@ -112,7 +112,7 @@ public class LevelPresetController : MonoBehaviour
                 go.transform.name = "CluesSprites, " + i;
                 SpriteRenderer[] sps = go.GetComponentsInChildren<SpriteRenderer>();
                 bugProfile.BugCluesSpriteColors.Shuffle();
-                Debug.Log("Set sprite clue color");
+                //Debug.Log("Set sprite clue color");
                 foreach (SpriteRenderer sp in sps)
                 {
                     sp.color = bugProfile.BugCluesSpriteColors[0];
@@ -124,7 +124,7 @@ public class LevelPresetController : MonoBehaviour
             }
             else
             {
-                Debug.Log("Spawn particle clue " + i);
+               // Debug.Log("Spawn particle clue " + i);
                 if (particleIndex >= bugProfile.BugClueParticleSystems.Count-1)
                 {
                     particleIndex = 0;
@@ -137,7 +137,7 @@ public class LevelPresetController : MonoBehaviour
                 ps.transform.name = "CluesParticles, " + i;
 
                 bugProfile.BugClueParticleSystems.Shuffle();
-                Debug.Log("Set particle clue color");
+               // Debug.Log("Set particle clue color");
                 ParticleSystem.MainModule main = ps.main;
                 main.startColor = bugProfile.BugCluesParticleColors[0];              
             }

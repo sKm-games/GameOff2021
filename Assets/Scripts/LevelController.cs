@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     private UIController uiController;
+    private JobController jobController;
     [SerializeField] private Transform levelHolder;
     [SerializeField] private GameObject levelPresetPrefabs;
     private LevelPresetController activeLevelController;
@@ -15,18 +16,12 @@ public class LevelController : MonoBehaviour
             return activeLevelController;
         }
     }
-    [SerializeField] private List<BugProfileDataObject> bugProfiles;
-    public List<BugProfileDataObject> GetBugProfiles
-    {
-        get
-        {
-            return bugProfiles;
-        }
-    }
+
 
     private void Awake()
     {
         uiController = this.GetComponent<UIController>();
+        jobController = this.GetComponent<JobController>();
     }
     
     private void Start()
@@ -40,7 +35,7 @@ public class LevelController : MonoBehaviour
         //Testing
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SetUpInvestigationPhase();
+            SetUpInvestigationPhase(jobController.GetActiveJobInfo);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -48,7 +43,7 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    private void SpawnTestLevel()
+    public void SpawnTestLevel()
     {
         GameObject go = Instantiate(levelPresetPrefabs, levelHolder);
         go.transform.localPosition = Vector3.zero;
@@ -60,21 +55,20 @@ public class LevelController : MonoBehaviour
         uiController.ToggleExterminationScreen(false);
     }
 
-    private void SetUpInvestigationPhase()
+    public void GoToJob()
     {
-        List<BugProfileDataObject> tempBugs = new List<BugProfileDataObject>(bugProfiles);
-        tempBugs.Shuffle(); //temp so dont change main list
-
-        activeLevelController.SetUpInvestigationPhase(tempBugs[0]);
-        uiController.ToggleInvestigationScreen(true);
+        
     }
 
-    private void SetUpExterminationPhase()
+    public void SetUpInvestigationPhase(JobInfoClass ji)
+    {
+        Debug.Log("LevelController:SetUpInvestigation");
+        activeLevelController.SetUpInvestigationPhase(ji.JobBugProfile);        
+    }
+
+    public void SetUpExterminationPhase()
     {
         activeLevelController.LevelCleanUp();
         activeLevelController.SetUpExterminatePhase();
-        
-        uiController.ToggleInvestigationScreen(false);
-        uiController.ToggleExterminationScreen(true);
     }
 }

@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    private EnumDataClass.GamePhasesEnum gamePhase;
+    private GameController gameController;
     private LevelController levelController;
     private UIController uiController;
+    private JobController jobController;
 
     private void Awake()
     {
         levelController = this.GetComponent<LevelController>();
         uiController = this.GetComponent<UIController>();
+        jobController = this.GetComponent<JobController>();
+        gameController = this.GetComponent<GameController>();
     }
 
     // Start is called before the first frame update
@@ -46,11 +49,11 @@ public class InputController : MonoBehaviour
             //Debug.Log("Rayhit == null");
             return;
         }
-        if (gamePhase == EnumDataClass.GamePhasesEnum.Investigation)
+        if (gameController.GetGamePhase == EnumDataClass.GamePhasesEnum.Investigation)
         {
             InvestigationTool(rayHit.transform);
         }
-        else if (gamePhase == EnumDataClass.GamePhasesEnum.Extermination)
+        else if (gameController.GetGamePhase == EnumDataClass.GamePhasesEnum.Extermination)
         {
             ExterminateTool(rayHit.transform);
         }
@@ -63,7 +66,8 @@ public class InputController : MonoBehaviour
         {
             string c = levelController.GetActiveLevelController.GetClue();
             uiController.ToggleClueScreen(true, c);
-            //add clue to job tracking system
+            uiController.UpdateClues(c);
+            t.gameObject.SetActive(false);
         }
     }
 
@@ -71,10 +75,5 @@ public class InputController : MonoBehaviour
     {
         //check tool type etc later
 
-    }
-
-    public void UpdateGamePhase(EnumDataClass.GamePhasesEnum gp)
-    {
-        gamePhase = gp;
     }
 }

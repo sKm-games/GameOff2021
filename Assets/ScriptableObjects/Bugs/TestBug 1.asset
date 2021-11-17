@@ -54,3 +54,9 @@ MonoBehaviour:
   BugName: Silverfish
   BugLatinName: Lepisma saccharinum
   BugDecription: Minecraft thingy, eats stone?
+  BugJobDescription:
+  - Test job info 4
+  - Test job info 2
+  - Test job info 3
+  - Test job info 1
+  BugJobBasePayment: 1337
